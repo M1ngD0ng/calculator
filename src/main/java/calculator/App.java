@@ -9,6 +9,7 @@ public class App {
         Scanner sc = new Scanner(System.in);
         Queue<Double> q=new LinkedList<>();
         int index=0;
+        String answer;
 
 
         while (true) {
@@ -31,11 +32,25 @@ public class App {
                 case '*' -> result = firstNumber * secondNumber;
                 case '/' -> result = firstNumber / secondNumber;
             }
+            sc.nextLine();
             System.out.println("결과: " + result);
+            q.add(result);
+            /* 배열에서 컬렉션으로 변경됨으로써 변경해야하는 부분 구현 */
+            System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
+            answer = sc.nextLine();
+            if (answer.equals("remove")){
+                q.remove();
+            }
+
+            System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
+            answer = sc.nextLine();
+            if (answer.equals("inquiry")){
+                q.forEach((value)-> System.out.print(value.toString()+' '));
+                System.out.println();
+            }
 
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
-            sc.nextLine();
-            String answer = sc.nextLine();
+            answer = sc.nextLine();
             if (answer.equals("exit")) break;
 
         }
