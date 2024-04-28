@@ -32,9 +32,8 @@ public class Calculator {
     public void removeFront(){
         this.q.remove();
     }
-    public void printAll(){
-        this.q.forEach((value) -> System.out.print(value.toString() + ' '));
-        System.out.println();
+    public Queue<Integer> getAll(){
+        return q;
     }
 
 }
