@@ -8,7 +8,7 @@ public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String answer;
-        ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator(new AddOperator(), new SubtractOperator(), new MultiplyOperator(), new DivideOperator(), new ModOperator());
+        ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator();
         CircleCalculator circleCalculator = new CircleCalculator();
 
         while (true) {
