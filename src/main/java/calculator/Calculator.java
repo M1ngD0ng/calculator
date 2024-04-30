@@ -6,34 +6,30 @@ import calculator.exception.ZeroDivisionException;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Calculator {
-    int firstNumber;
-    int secondNumber;
-    int result;
-    Queue<Integer> q = new LinkedList<>();
+public abstract class Calculator {
+    double result;
+    Queue<Double> results;
+//
+//    public Calculator(){ // 연산 결과 저장할 컬렉션 필드 초기화
+//        this.results = new LinkedList<>();
+//    }
+//
+//    public abstract void addResult(double result);
+//
+//    public abstract void removeResult();
+//
+//    public abstract void inquiryResults();
 
-    public int calculate(int firstNumber, int secondNumber, char operator) throws ZeroDivisionException, BadInputException {
-        this.firstNumber = firstNumber;
-        this.secondNumber = secondNumber;
-
-        switch (operator) {
-            case '+' -> this.result = firstNumber + secondNumber;
-            case '-' -> this.result = firstNumber - secondNumber;
-            case '*' -> this.result = firstNumber * secondNumber;
-            case '/' -> {
-                if (secondNumber == 0) throw new ZeroDivisionException();
-                else this.result = firstNumber / secondNumber;
-            }
-            default -> throw new BadInputException();
-        }
-        this.q.add(result);
-        return result;
-    }
-    public void removeFront(){
-        this.q.remove();
-    }
-    public Queue<Integer> getAll(){
-        return q;
+    public void addResult(double result) {
+        this.results.add(result);
     }
 
+    public void removeResult() {
+        this.results.remove();
+    }
+
+    public void inquiryResults() {
+        this.results.forEach((value) -> System.out.print(value.toString() + ' '));
+        System.out.println();
+    }
 }
