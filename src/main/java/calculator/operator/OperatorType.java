@@ -1,6 +1,6 @@
 package calculator.operator;
 
-public enum OperatorType {
+public enum OperatorType implements AbstractOperator {
     ADD("+"){
         public double operate(double a, double b) {
             return a + b;
@@ -31,5 +31,4 @@ public enum OperatorType {
     OperatorType(String oper) {
         this.oper = oper;
     }
-    public abstract double operate(double a, double b);
 }

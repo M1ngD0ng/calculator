@@ -9,16 +9,6 @@ import java.util.Queue;
 public abstract class Calculator {
     double result;
     Queue<Double> results;
-//
-//    public Calculator(){ // 연산 결과 저장할 컬렉션 필드 초기화
-//        this.results = new LinkedList<>();
-//    }
-//
-//    public abstract void addResult(double result);
-//
-//    public abstract void removeResult();
-//
-//    public abstract void inquiryResults();
 
     public void addResult(double result) {
         this.results.add(result);
@@ -32,4 +22,9 @@ public abstract class Calculator {
         this.results.forEach((value) -> System.out.print(value.toString() + ' '));
         System.out.println();
     }
+    public void inquiryBiggerResults(double num) {
+        this.results.stream().filter((value) -> value> num ).forEach((value) -> System.out.print(value.toString() + ' '));
+        System.out.println();
+    }
+
 }

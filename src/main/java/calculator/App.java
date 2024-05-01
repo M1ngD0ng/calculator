@@ -19,11 +19,11 @@ public class App {
             if (answer.equals("1")) {
                 System.out.print("첫 번째 숫자를 입력하세요: ");
                 // Scanner를 사용하여 양의 정수를 입력받고 적합한 타입의 변수에 저장합니다.
-                double num1 = sc.nextInt();
+                double num1 = sc.nextDouble();
 
                 System.out.print("두 번째 숫자를 입력하세요: ");
                 // Scanner를 사용하여 양의 정수를 입력받고 적합한 타입의 변수에 저장합니다.
-                double num2 = sc.nextInt();
+                double num2 = sc.nextDouble();
 
                 System.out.print("사칙연산 기호를 입력하세요: ");
                 // 사칙연산 기호를 적합한 타입으로 선언한 변수에 저장합니다.
@@ -39,7 +39,7 @@ public class App {
                 }
                 System.out.println("결과: " + result);
 
-                /* 배열에서 컬렉션으로 변경됨으로써 변경해야하는 부분 구현 */
+
                 System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
                 answer = sc.nextLine();
                 if (answer.equals("remove")) {
@@ -52,9 +52,22 @@ public class App {
                     arithmeticCalculator.inquiryResults();
                 }
 
+                System.out.println("숫자를 입력하시면 해당 숫자보다 큰 값을 모두 출력합니다. (조회를 원하지 않으면 아무 문자를 입력해주세요.)");
+                answer = sc.nextLine();
+                double num;
+                try {
+                    num=Double.parseDouble(answer);
+                }catch (NumberFormatException e) {
+                    System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
+                    answer = sc.nextLine();
+                    if (answer.equals("exit")) break; // 이 부분에서 숫자가 아닌 값이 들어왔을 때 에러만 던지고 아래 문을 수행하고 싶은데 구현 못함
+                    continue;
+                }
+
+                arithmeticCalculator.inquiryBiggerResults(num);
             } else if (answer.equals("2")) {
                 System.out.print("원의 반지름을 입력하세요: ");
-                int radius = sc.nextInt();
+                double radius = sc.nextDouble();
                 sc.nextLine();
 
                 result = circleCalculator.calculate(radius);
@@ -68,7 +81,6 @@ public class App {
                     circleCalculator.removeResult();
                 }
             }
-
 
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             answer = sc.nextLine();
