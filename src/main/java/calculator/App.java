@@ -8,7 +8,7 @@ public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String answer;
-        ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator();
+        ArithmeticCalculator<Double> arithmeticCalculator = new ArithmeticCalculator<>(Double.class);
         CircleCalculator circleCalculator = new CircleCalculator();
 
         while (true) {
@@ -33,6 +33,7 @@ public class App {
 
                 try {
                     result = arithmeticCalculator.calculate(num1, num2, operator);
+                    arithmeticCalculator.addResult(result);
                 } catch (Exception e) {
                     System.out.println(e.getMessage()); // 해당 에러 메시지를 출력하고 다시 처음부터 입력 받음
                     continue;
@@ -71,6 +72,7 @@ public class App {
                 sc.nextLine();
 
                 result = circleCalculator.calculate(radius);
+                circleCalculator.addResult(result);
                 System.out.println("결과: " + result);
 
                 circleCalculator.inquiryResults();

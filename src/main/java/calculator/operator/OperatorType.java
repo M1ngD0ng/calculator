@@ -1,34 +1,24 @@
 package calculator.operator;
 
-public enum OperatorType implements AbstractOperator {
-    ADD("+"){
-        public double operate(double a, double b) {
-            return a + b;
-        }
-    },
-    SUB("-"){
-        public double operate(double a, double b) {
-            return a - b;
-        }
-    },
-    MULTI("*"){
-        public double operate(double a, double b) {
-            return a * b;
-        }
-    },
-    DIVIDE("/"){
-        public double operate(double a, double b) {
-            return a / b;
-        }
-    },
-    MOD("%"){
-        public double operate(double a, double b) {
-            return a % b;
-        }
-    };
+public enum OperatorType {
+    ADD('+'),
+    SUB('-'),
+    MULTI('*'),
+    DIVIDE('/'),
+    MOD('%');
 
-    private final String oper;
-    OperatorType(String oper) {
-        this.oper = oper;
+    private final char symbol;
+
+    OperatorType(char symbol) {
+        this.symbol = symbol;
+    }
+
+    public static OperatorType fromOperator(char operator) {
+        for (OperatorType type : OperatorType.values()) {
+            if(type.symbol == operator) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException("해당하는 연산자가 없습니다. " + operator);
     }
 }

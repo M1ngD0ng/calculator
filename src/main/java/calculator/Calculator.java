@@ -1,13 +1,9 @@
 package calculator;
 
-import calculator.exception.BadInputException;
-import calculator.exception.ZeroDivisionException;
-
-import java.util.LinkedList;
 import java.util.Queue;
 
 public abstract class Calculator {
-    double result;
+//    double result;
     Queue<Double> results;
 
     public void addResult(double result) {

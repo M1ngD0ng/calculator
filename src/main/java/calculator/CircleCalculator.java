@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 public class CircleCalculator extends Calculator {
     static final double PI = 3.141592;
+
     double radius;
 
     public CircleCalculator() {
@@ -12,8 +13,8 @@ public class CircleCalculator extends Calculator {
 
     public double calculate(double number) {
         this.radius = number;
-        this.result = PI * Math.pow(number, 2);
+        double result = PI * Math.pow(number, 2);
         this.results.add(result);
-        return this.result;
+        return result;
     }
 }

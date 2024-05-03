@@ -1,36 +1,41 @@
 package calculator;
 
-import calculator.exception.BadInputException;
-import calculator.exception.ZeroDivisionException;
 import calculator.operator.*;
 
 import java.util.LinkedList;
 
 
-public class ArithmeticCalculator extends Calculator {
-    double firstNumber;
-    double secondNumber;
+public class ArithmeticCalculator<T extends Number> extends Calculator {
+    public final Class<T> type;
 
-    public ArithmeticCalculator() {
+    public ArithmeticCalculator(Class<T> type) {
         this.results = new LinkedList<>();
+        this.type = type;
     }
 
-    public double calculate(double firstNumber, double secondNumber, char operator) throws ZeroDivisionException, BadInputException {
-        this.firstNumber = firstNumber;
-        this.secondNumber = secondNumber;
-
-        switch (operator) {
-            case '+' -> this.result = OperatorType.ADD.operate(this.firstNumber, this.secondNumber);
-            case '-' -> this.result = OperatorType.SUB.operate(this.firstNumber, this.secondNumber);
-            case '*' -> this.result = OperatorType.MULTI.operate(this.firstNumber, this.secondNumber);
-            case '%' -> this.result = OperatorType.MOD.operate(this.firstNumber, this.secondNumber);
-            case '/' -> {
-                if (secondNumber==0) throw new ZeroDivisionException();
-                else this.result = OperatorType.DIVIDE.operate(this.firstNumber, this.secondNumber);
-            }
-            default -> throw new BadInputException();
-        }
-        this.addResult(this.result);
-        return this.result;
+    public T calculate(T firstNumber, T secondNumber, char operator)  {
+        return operatorFactory(operator).operate(firstNumber, secondNumber);
+    }
+//
+//        switch (operator) {
+//            case ADD ->
+//            case '-' -> this.result = OperatorType.SUB.operate(firstNumber, secondNumber);
+//            case '*' -> this.result = OperatorType.MULTI.operate(firstNumber, secondNumber);
+//            case '%' -> this.result = OperatorType.MOD.operate(firstNumber, secondNumber);
+//            case '/' -> this.result = OperatorType.DIVIDE.operate(firstNumber, secondNumber);
+//            default -> throw new BadInputException();
+//        }
+//        this.addResult(this.result);
+//        return this.result;
+//    }
+    private AbstractOperator<Double> operatorFactory(char operator) {
+        OperatorType operatorType = OperatorType.fromOperator(operator);
+        return switch (operatorType) {
+            case ADD -> new AddOperator(type);
+            case SUB -> new SubtractOperator(type);
+            case MULTI -> new MultiplyOperator(type);
+            case DIVIDE -> new DivideOperator(type);
+            case MOD -> new ModOperator(type);
+        };
     }
 }

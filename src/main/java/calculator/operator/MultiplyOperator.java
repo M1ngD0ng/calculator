@@ -1,8 +1,16 @@
 package calculator.operator;
 
-public class MultiplyOperator implements AbstractOperator{
+public class MultiplyOperator<T extends Number> implements AbstractOperator<T> {
+    public final Class<T> type;
+
+    public MultiplyOperator(Class<T> type) {
+        this.type = type;
+    }
+
     @Override
-    public double operate(double a, double b) {
-        return a * b;
+    public T  operate(T  num1, T  num2) {
+        double result = num1.doubleValue() * num2.doubleValue();
+
+        return NumberConversionUtils.convertNumberToType(result, type);
     }
 }
